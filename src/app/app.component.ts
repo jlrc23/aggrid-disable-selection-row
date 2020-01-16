@@ -14,14 +14,13 @@ export class AppComponent implements OnInit {
   nodeSelected = undefined
   puedecambiar = new FormControl('YES');
   columnDefs = [
-      {headerName: 'Make', field: 'make', sortable: true, filter: true},
-      {headerName: 'Model', field: 'model', sortable: true, filter: true },
-      {headerName: 'Price', field: 'price', sortable: true, filter: true }
+      {headerName: 'id', field: 'id', sortable: true, filter: true},
+      {headerName: 'value', field: 'value', sortable: true, filter: true }
   ];
   rowData = [
-      { make: 'Toyota', model: 'Celica', price: 35000 },
-      { make: 'Ford', model: 'Mondeo', price: 32000 },
-      { make: 'Porsche', model: 'Boxter', price: 72000 }
+      { id: '1', value: 'Refrescos Individual'},
+      { id: '2', value: 'Refrescos Familiar'},
+      { id: '3', value: 'Otros' }
   ];
 
     ngOnInit(){
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
         console.log(value);
         this.suppressRowClickSelection = (value == "NO")
       });
-      //this.puedecambiar.setValue("NO");
+      
     }
 
     onGridReady(params) {
@@ -52,30 +51,16 @@ export class AppComponent implements OnInit {
     console.log($event.data);
     console.log(typeof($event));
     if(this.suppressRowClickSelection){
-      if(confirm("¿Deseas guardar tus cambios?")){
-        console.log("Si se guardan");
-      }else{
-        debugger;
+      if(confirm("¿Deseas cambiar de valor, tus cambios se van a perder?")){
         this.suppressRowClickSelection = false;
         $event.node.setSelected(true, true);
         console.log("Se pierden");
+        this.puedecambiar.setValue("YES");
+      }else{
+        console.log("Si se guardan");
       }
 
     }
 
   }
-
-  onRowSelected($event){
-    /*console.group("onRowSelected")
-    console.log("onRowSelected::Data: ")
-    console.log("puede cambiar:", this.puedecambiar.value);
-  
-    this.nodeSelected = $event.node;
-     
-    console.log($event.node.data)
-    console.log("Selected: " + $event.node.selected)
-    //window.alert("Row selected: " + $event.node.selected )
-    console.groupEnd();*/
-  }
-  
 }
