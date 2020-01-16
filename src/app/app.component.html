@@ -1,0 +1,20 @@
+  <select name="puedecambiar" id="puedecambiar" [formControl]="puedecambiar">
+  <option value="NO">Hay cambios(no puedes cambiar)</option>
+  <option value="YES">No hay cambios(puedese cambiar)</option>
+</select>
+
+
+<ag-grid-angular
+    style="width: 100%; height: 500px;"
+    class="ag-theme-balham"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    rowSelection="single"
+    rowMultiSelectWithClick="false"
+    [suppressRowClickSelection]="suppressRowClickSelection"
+    (rowSelected)="onRowSelected($event)"
+    (gridReady)="onGridReady($event)"
+    (selectionChanged)="onSelectionChanged($event)"
+    (rowClicked)= "rowClick($event)"
+    >
+</ag-grid-angular>
